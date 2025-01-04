@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "run": "tsx index.ts"
+    "test": "tsx src/index.ts",
+    "push": "git add . && git commit -m \"update\" && git push"
   },
   "author": "",
   "license": "ISC",
@@ -12,8 +13,8 @@
     "cheerio": "^1.0.0",
     "colors": "^1.4.0",
     "js-beautify": "^1.15.1",
+    "jsm-treeify": "^1.0.1",
     "treeify": "^1.1.0"
-
   },
   "devDependencies": {
     "@types/node": "^20.11.16",

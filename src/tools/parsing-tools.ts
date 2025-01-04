@@ -1,30 +1,26 @@
+import {
+  load,
+  type CheerioAPI
+} from "cheerio";
+import colors from "colors";
+import jsmTreeify from "jsm-treeify";
 import fs from "node:fs";
 import path from "node:path";
-import colors from "colors";
-import {
-  type Cheerio,
-  type AcceptedElems,
-  load,
-  type CheerioAPI,
-} from "cheerio";
-import { html as beautify } from "js-beautify";
 import {
   TCategory,
-  TFieldType,
-  TOperator,
-  TConstraint,
-  TOutputDatum,
-  TField,
-} from "./tools/typing";
+  TField
+} from "./typing";
+import { HTML_SOURCE_FOLDER, JSON_OUTPUT } from "../config";
 colors.enable();
+
 
 /**
  * Using this function we will extract all the fields from the form
  */
-const extractCurrentCategoryFields = async (fileName: string) => {
+export const extractCurrentCategoryFields = async (fileName: string) => {
   const filePath = path.join(
-    __dirname,
-    `forms/html-form-files/${fileName}.html`
+    HTML_SOURCE_FOLDER,
+    `${fileName}.html`
   );
 
   if (!fs.existsSync(filePath)) {
@@ -77,7 +73,7 @@ const extractCurrentCategoryFields = async (fileName: string) => {
   return { $, fields };
 };
 
-function extractFieldsConfigFromFieldsArray(
+export function extractFieldsConfigFromFieldsArray(
   $: CheerioAPI,
   fields: {
     index: number;
@@ -131,7 +127,7 @@ function extractFieldsConfigFromFieldsArray(
         }
       });
 
-    console.log("Extracted field".gray, field);
+    console.log("Extracted field".gray, jsmTreeify(field));
     fieldObject.field = field;
     result.push({ ...fieldObject });
   }
@@ -139,18 +135,3 @@ function extractFieldsConfigFromFieldsArray(
   console.log("Returning the result".gray, typeof result);
   return result;
 }
-
-const FILE_NAME = "american_services";
-
-extractCurrentCategoryFields(FILE_NAME).then(({ $, fields }) => {
-  const fieldsResult = extractFieldsConfigFromFieldsArray($, fields);
-  // export the result to a file: ./forms/as-fields.json
-  fs.writeFileSync(
-    path.join(__dirname, `forms/json/${FILE_NAME}.json`),
-    JSON.stringify(
-      fieldsResult.map((field) => ({ ...field, el: "cheerio element" })),
-      null,
-      2
-    )
-  );
-});
