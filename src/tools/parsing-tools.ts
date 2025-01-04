@@ -17,12 +17,8 @@ colors.enable();
 /**
  * Using this function we will extract all the fields from the form
  */
-export const extractCurrentCategoryFields = async (fileName: string) => {
-  const filePath = path.join(
-    HTML_SOURCE_FOLDER,
-    `${fileName}.html`
-  );
-
+export const extractCurrentCategoryFields = async (filePath: string) => {
+  
   if (!fs.existsSync(filePath)) {
     console.error("File does not exist".red, filePath);
     throw new Error("File does not exist");

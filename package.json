@@ -3,17 +3,26 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "tsx src/index.ts",
+    "build": "tsc",
+    "test": "tsx src/index.ts parse",
+    "exec": "tsx src/index.ts",
     "push": "git add . && git commit -m \"update\" && git push"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/lodash": "^4.17.14",
     "cheerio": "^1.0.0",
     "colors": "^1.4.0",
+    "commander": "^13.0.0",
+    "fs-extra": "^11.2.0",
+    "glob": "^11.0.0",
+    "inquirer": "^12.3.0",
     "js-beautify": "^1.15.1",
     "jsm-treeify": "^1.0.1",
+    "lodash": "^4.17.21",
     "treeify": "^1.1.0"
   },
   "devDependencies": {
