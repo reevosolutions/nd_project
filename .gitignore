@@ -84,3 +84,4 @@ output/
 
 # Local directories
 forms/json/*
+!forms/json/placeholder.txt
