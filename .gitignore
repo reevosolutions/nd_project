@@ -83,4 +83,4 @@ output/
 *.test.ts.snap
 
 # Local directories
-forms/json/
+forms/json/*
