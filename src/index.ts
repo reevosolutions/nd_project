@@ -1,46 +1,14 @@
 import colors from "colors";
+import { Command } from 'commander';
+import inquirer from 'inquirer';
+import jsmTreeify from "jsm-treeify";
+import { last } from 'lodash';
 import fs from "node:fs";
 import path from "node:path";
 import { HTML_SOURCE_FOLDER, JSON_OUTPUT } from "./config";
-import { extractCurrentCategoryFields, extractFieldsConfigFromFieldsArray } from "./tools/parsing-tools";
-import jsmTreeify from "jsm-treeify";
-import { last } from 'lodash';
-import { Command } from 'commander';
-import inquirer from 'inquirer';
-import { glob } from 'glob';
 import { listHtmlFiles } from "./tools/files";
-
+import { extractCurrentCategoryFields, extractFieldsConfigFromFieldsArray } from "./tools/parsing-tools";
 colors.enable();
-
-
-// /**
-//  * The html file base name without ".html" extension
-//  */
-
-// if (process.argv.length < 3) {
-//   console.error("Please provide the file name as an argument");
-//   process.exit(1);
-// }
-// const argvFileName = last(process.argv);
-
-// const FILE_NAME = last(process.argv) as string;
-
-// extractCurrentCategoryFields(FILE_NAME).then(({ $, fields }) => {
-//   const fieldsResult = extractFieldsConfigFromFieldsArray($, fields);
-//   // export the result to a file: ./forms/as-fields.json
-//   fs.writeFileSync(
-//     path.join(JSON_OUTPUT, `${FILE_NAME}.json`),
-//     JSON.stringify(
-//       fieldsResult.map((field) => ({ ...field, el: "cheerio element" })),
-//       null,
-//       2
-//     )
-//   );
-
-//   console.log(jsmTreeify(last(process.argv)));
-
-// });
-
 
 
 
@@ -87,9 +55,8 @@ program
       )
     );
 
+    // Log the result output
     console.log(jsmTreeify(last(process.argv)));
-
-
 
     // end
     console.log();
@@ -97,4 +64,3 @@ program
   });
 
 program.parse(process.argv);
-program.action
